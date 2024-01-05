@@ -9,14 +9,17 @@
   </head>
   <body>
     <section class="image-section">
-      <div class="input-container">
+      <form class="search-form">
         <input
           class="search-input"
+          name="input"
           type="text"
           placeholder="Search images..."
+          required
         />
-        <button class="search-button" type="button">Search</button>
-      </div>
+        <button class="search-button" type="submit">Search</button>
+      </form>
+      <span class="loader"></span>
       <div class="gallery"></div>
     </section>
 
