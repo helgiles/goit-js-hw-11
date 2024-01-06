@@ -16,6 +16,10 @@ var lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
 });
 
+const loaderToggle = loader => {
+  loader.classList.toggle('loader-is-active');
+};
+
 const renderImages = images => {
   return `<li class='gallery-item'>
   <a class='gallery-link' href='${images.largeImageURL}'>
@@ -49,9 +53,7 @@ const renderImages = images => {
 form.addEventListener('submit', event => {
   event.preventDefault();
   const query = input.value.trim();
-  gallery.innerHTML = '';
-  input.value = '';
-  loader.style.display = 'block';
+  loaderToggle(loader);
 
   const searchParams = new URLSearchParams({
     key: '41579263-ea77ea2d4a90e42f3f0b59371',
@@ -63,7 +65,9 @@ form.addEventListener('submit', event => {
 
   fetch(`${BASE_URL}?${searchParams}`)
     .then(response => {
-      loader.style.display = 'none';
+      loaderToggle(loader);
+      gallery.innerHTML = '';
+      input.value = '';
       if (!response.ok) {
         throw new Error(response.status);
       }
